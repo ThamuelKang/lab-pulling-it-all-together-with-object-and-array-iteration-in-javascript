@@ -114,3 +114,77 @@ function gameObject() {
         },
     };
 }
+
+//new object with destructured players objects
+const players = {
+    ...gameObject().home.players,
+    ...gameObject().away.players
+}
+
+//unnestting object
+const teamObject = gameObject();
+
+function numPointsScored(playerName) {
+    for (const name in players) {
+        if (name === playerName) {
+            return players[name].points
+        }
+    }
+    return `${playerName} not found`
+
+}
+
+function shoeSize(playerName) {
+    for (const name in players) {
+        if (name === playerName) {
+            return players[name].shoe
+        }
+    }
+    return `${playerName} not found`
+}
+
+function teamColors(teamName) {
+
+    for (const team in teamObject) {
+        if (teamObject[team].teamName === teamName) {
+            return teamObject[team].colors
+        }
+    }
+    return `${teamName} not found`
+}
+
+function teamNames() {
+    const playerArray = [];
+    for (const team in teamObject) {
+        playerArray.push(teamObject[team].teamName)
+    }
+    return playerArray
+}
+
+function playerNumbers(teamName) {
+    for (const team in teamObject) {
+        if (teamObject[team].teamName === teamName) {
+            const allPlayers = Object.values(teamObject[team].players)
+            const playerPoints = allPlayers.map(num => num.points)
+            return playerPoints
+        }
+    }
+}
+
+function playerStats(playerName) {
+    for (const name in players) {
+        if (name === playerName) {
+            return players[name]
+        }
+    }
+    return `${playerName} not found`
+}
+
+
+console.log(playerStats('Jeff Adrien'))
+
+// console.log(playerNumbers('Brooklyn Nets'))
+// console.log(teamNames())
+// console.log(teamColors("Brooklyn Nets"))
+// console.log(numPointsScored('Jeff Adrien'))
+// console.log(shoeSize('Jeff Adrien'))
